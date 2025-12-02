@@ -18,15 +18,15 @@ const NPC_CONFIG = [
     { 
         name: 'finn', 
         states: [
-            { image: '/images/finn-sword.png', songIndex: 0 }, // Puccini
-            { image: '/images/finn-piano.png', songIndex: 1 }  // Liszt - Un Sospiro
+            { image: 'images/finn-sword.png', songIndex: 0 }, // Puccini
+            { image: 'images/finn-piano.png', songIndex: 1 }  // Liszt - Un Sospiro
         ]
     },
     { 
         name: 'jake', 
         states: [
-            { image: '/images/jake-violin.png', songIndex: 2 },    // Liszt - Liebestraum
-            { image: '/images/jake-sandwich.png', songIndex: 3 }   // Dark is the Night
+            { image: 'images/jake-violin.png', songIndex: 2 },    // Liszt - Liebestraum
+            { image: 'images/jake-sandwich.png', songIndex: 3 }   // Dark is the Night
         ]
     }
 ];
@@ -64,7 +64,7 @@ function startBackgroundMusic(mode = currentMode) {
         if (backgroundAudio) {
             backgroundAudio.pause();
         }
-        backgroundAudio = new Audio(`/audio/${bgmFile}`);
+        backgroundAudio = new Audio(`audio/${bgmFile}`);
         backgroundAudio.loop = true; 
     }
     
@@ -135,7 +135,7 @@ function playTargetSong(index) {
     }
     
     // 创建新的音频元素
-    const audioPath = `/audio/${song.filename}`;
+    const audioPath = `audio/${song.filename}`;
     targetAudio = new Audio(audioPath);
     targetAudio.loop = false; // 不循环
     targetAudio.volume = 1.0; // 设置音量为最大
