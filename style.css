@@ -31,12 +31,14 @@ body {
 
 /* Day Mode 样式：使用白天背景图 */
 .day {
-    background-image: url('../images/background-day.jpg');
+    /* 修正为绝对根路径，让 Vite 在打包时知道这是静态资源 */
+    background-image: url('/images/background-day.jpg'); 
 }
 
 /* Night Mode 样式：使用夜晚背景图 */
 .night {
-    background-image: url('../images/background-night.jpg');
+    /* 修正为绝对根路径 */
+    background-image: url('/images/background-night.jpg');
 }
 
 /* 确保背景图片正确加载 */
