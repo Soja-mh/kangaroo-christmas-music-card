@@ -1,0 +1,21 @@
+{
+  "name": "kangaroo-christmas-mini-app",
+  "version": "1.0.0",
+  "description": "A light interactive Christmas mini web app.",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "vite",
+    "javascript",
+    "christmas"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

@@ -1,0 +1,323 @@
+/* 基础重置 */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    overflow: hidden; 
+    height: 100vh;
+    width: 100vw;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- 场景通用样式 --- */
+#main-app {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    
+    /* 图片背景通用设置 */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: opacity 0.5s ease;
+}
+
+/* Day Mode 样式：使用白天背景图 */
+.day {
+    background-image: url('/images/background-day.jpg');
+}
+
+/* Night Mode 样式：使用夜晚背景图 */
+.night {
+    background-image: url('/images/background-night.jpg');
+}
+
+/* 确保背景图片正确加载 */
+#main-app::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    z-index: -1;
+}
+
+/* 元素可见性切换 */
+.day-only { display: none; }
+.night-only { display: none; }
+
+.day .day-only { display: block; }
+.night .night-only { display: block; }
+
+/* --- 场景元素 (纯装饰，有摇曳动画) --- */
+.scene-element {
+    position: absolute;
+    width: 80px; 
+    height: auto;
+    pointer-events: none;
+    animation: sway 5s infinite ease-in-out alternate;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes sway {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(2px, -2px) rotate(2deg); }
+}
+
+/* Emoji元素现在在按钮UI上，不需要单独的样式 */
+
+
+/* --- 模式切换按钮（圆形） --- */
+#mode-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 100;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    cursor: pointer;
+    background: linear-gradient(135deg, #d4a574 0%, #b8860b 100%);
+    color: #3e2723;
+    border: 2px solid #8b6914;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(139, 105, 20, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mode-toggle:hover {
+    transform: translateY(-1px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(139, 105, 20, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, #e0b87a 0%, #c99a1a 100%);
+}
+
+#mode-toggle:active {
+    transform: translateY(0) scale(0.95);
+    box-shadow: 0 1px 4px rgba(139, 105, 20, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 目标歌曲播放控制 UI 样式 - Radio型暖黄木质风格 */
+#target-audio-controls {
+    position: absolute;
+    top: 80px;
+    right: 15px;
+    z-index: 100;
+    background: linear-gradient(135deg, rgba(212, 165, 116, 0.95) 0%, rgba(184, 134, 11, 0.95) 100%);
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(139, 105, 20, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(139, 105, 20, 0.6);
+    min-width: 220px;
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Emoji元素在按钮UI上 */
+#target-audio-controls .emoji-element {
+    position: absolute;
+    font-size: 24px;
+    pointer-events: none;
+    z-index: 101;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+    animation: emoji-sway 5s ease-in-out infinite;
+}
+
+#sunflower-emoji {
+    top: -8px;
+    left: 15px;
+}
+
+#clover-emoji {
+    top: -8px;
+    right: 15px;
+    animation-delay: 1.5s;
+}
+
+@keyframes emoji-sway {
+    0% { transform: rotate(0deg) translateY(0); }
+    50% { transform: rotate(3deg) translateY(-2px); }
+    100% { transform: rotate(-2deg) translateY(1px); }
+}
+
+/* Radio型控制面板 */
+#radio-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#radio-station-info {
+    background: rgba(139, 105, 20, 0.2);
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(139, 105, 20, 0.4);
+}
+
+#current-song-info {
+    font-size: 11px;
+    color: #3e2723;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+    display: block;
+}
+
+#radio-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+#target-audio-controls button {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: 1px solid rgba(139, 105, 20, 0.8);
+    border-radius: 6px;
+    background: linear-gradient(135deg, #d4a574 0%, #b8860b 100%);
+    color: #3e2723;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 4px rgba(139, 105, 20, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    min-width: 40px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+    flex: 1;
+}
+
+#target-audio-controls button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(139, 105, 20, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, #e0b87a 0%, #c99a1a 100%);
+}
+
+#target-audio-controls button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(139, 105, 20, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.hidden {
+    display: none !important; 
+}
+
+/* --- NPC 容器样式 --- */
+#npc-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+}
+
+/* --- NPC 基础样式 (静止) --- */
+.npc {
+    position: absolute;
+    width: 120px; 
+    height: auto;
+    max-width: 15vw;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+.npc:hover {
+    transform: scale(1.1) translateY(-5px);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+    z-index: 10;
+}
+
+
+/* --- 开屏动画 --- */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 50%, #7ec8a3 100%);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: opacity 0.5s ease;
+}
+
+#kangaroo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+}
+
+/* 袋鼠全屏消失动画 Keyframes */
+@keyframes kangaroo-fade {
+    0% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% { 
+        opacity: 0;
+        transform: scale(1.1);
+    }
+}
+
+.animate-kangaroo {
+    animation: kangaroo-fade 2.5s forwards; 
+}
+
+/* 跳过按钮样式 */
+#skip-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    z-index: 201;
+}
+
+#skip-button:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
