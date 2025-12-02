@@ -1,9 +1,9 @@
 // --- 配置：目标歌曲列表  ---
 const TARGET_SONGS = [
-    { title: "Puccini - Musettas Waltz", filename: "Puccini - La Bohème - Musettas Waltz.mp3" },
-    { title: "Franz Liszt - Un Sospiro", filename: "Franz Liszt - Un Sospiro.mp3" },
-    { title: "Franz Liszt - Liebestraum", filename: "Franz Liszt - Liebestraum - Love Dream.mp3" },
-    { title: "Dark is the Night", filename: "Dark is the Night - Soviet WW2 Song.mp3" },
+    { title: "Puccini - Musettas Waltz", filename: "puccini-la-boheme-musettas-waltz.mp3" },
+    { title: "Franz Liszt - Un Sospiro", filename: "franz-liszt-un-sospiro.mp3" },
+    { title: "Franz Liszt - Liebestraum", filename: "franz-liszt-liebestraum-love-dream.mp3" },
+    { title: "Dark is the Night", filename: "dark-is-the-night-soviet-ww2-song.mp3" },
 ];
 
 // --- 配置：背景音乐 ---
